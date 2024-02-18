@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Image</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Process Image</h1>
+    <form action="/process/{{ filename }}" method="post">
+        {% if 'rgb' in request.form %}
+        <input type="checkbox" name="rgb" checked> Convert to RGB<br>
+        {% else %}
+        <input type="checkbox" name="rgb"> Convert to RGB<br>
+        {% endif %}
+        {% if 'grayscale' in request.form %}
+        <input type="checkbox" name="grayscale" checked> Convert to Grayscale<br>
+        {% else %}
+        <input type="checkbox" name="grayscale"> Convert to Grayscale<br>
+        {% endif %}
+        {% if 'binary' in request.form %}
+        <input type="checkbox" name="binary" checked> Convert to Binary with threshold:
+        <input type="number" name="threshold" value="{{ request.form['threshold'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="binary"> Convert to Binary with threshold:
+        <input type="number" name="threshold"><br>
+        {% endif %}
+        {% if 'brightness_contrast' in request.form %}
+        <input type="checkbox" name="brightness_contrast" checked> Adjust Brightness and Contrast:<br>
+        Alpha: <input type="number" name="alpha" step="0.1" value="{{ request.form['alpha'] }}">,
+        Beta: <input type="number" name="beta" value="{{ request.form['beta'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="brightness_contrast"> Adjust Brightness and Contrast:
+        Alpha: <input type="number" name="alpha" step="0.1">,
+        Beta: <input type="number" name="beta"><br>
+        {% endif %}
+        <h3 class="annotate">Add Annotations:</h3>
+        {% if 'annotation' in request.form %}
+        <input type="checkbox" name="annotation" checked> Annotation<br>
+        {% else %}
+        <input type="checkbox" name="annotation"> Annotation<br>
+        {% endif %}
+        {% if 'line' in request.form %}
+        <input type="checkbox" name="line" checked> Line:
+        Start Point (x, y): <input type="number" name="line_start_x" value="{{ request.form['line_start_x'] }}">,
+        <input type="number" name="line_start_y" value="{{ request.form['line_start_y'] }}">,
+        End Point (x, y): <input type="number" name="line_end_x" value="{{ request.form['line_end_x'] }}">,
+        <input type="number" name="line_end_y" value="{{ request.form['line_end_y'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="line"> Line:
+        Start Point (x, y): <input type="number" name="line_start_x">,
+        <input type="number" name="line_start_y">,
+        End Point (x, y): <input type="number" name="line_end_x">,
+        <input type="number" name="line_end_y"><br>
+        {% endif %}
+        {% if 'rectangle' in request.form %}
+        <input type="checkbox" name="rectangle" checked> Rectangle:
+        Start Point (x, y): <input type="number" name="rect_start_x" value="{{ request.form['rect_start_x'] }}">,
+        <input type="number" name="rect_start_y" value="{{ request.form['rect_start_y'] }}">,
+        End Point (x, y): <input type="number" name="rect_end_x" value="{{ request.form['rect_end_x'] }}">,
+        <input type="number" name="rect_end_y" value="{{ request.form['rect_end_y'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="rectangle"> Rectangle:
+        Start Point (x, y): <input type="number" name="rect_start_x">,
+        <input type="number" name="rect_start_y">,
+        End Point (x, y): <input type="number" name="rect_end_x">,
+        <input type="number" name="rect_end_y"><br>
+        {% endif %}
+        {% if 'circle' in request.form %}
+        <input type="checkbox" name="circle" checked> Circle:
+        Center (x, y): <input type="number" name="circle_center_x" value="{{ request.form['circle_center_x'] }}">,
+        <input type="number" name="circle_center_y" value="{{ request.form['circle_center_y'] }}">,
+        Radius: <input type="number" name="circle_radius" value="{{ request.form['circle_radius'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="circle"> Circle:
+        Center (x, y): <input type="number" name="circle_center_x">,
+        <input type="number" name="circle_center_y">,
+        Radius: <input type="number" name="circle_radius"><br>
+        {% endif %}
+        {% if 'text' in request.form %}
+        <input type="checkbox" name="text" checked> Text:
+        Text: <input type="text" name="text" value="{{ request.form['text'] }}">,
+        Position (x, y): <input type="number" name="text_x" value="{{ request.form['text_x'] }}">,
+        <input type="number" name="text_y" value="{{ request.form['text_y'] }}"><br>
+        {% else %}
+        <input type="checkbox" name="text"> Text:
+        Text: <input type="text" name="text">,
+        Position (x, y): <input type="number" name="text_x">,
+        <input type="number" name="text_y"><br>
+        {% endif %}
+        <h3>Image Operations:</h3>
+        <input type="checkbox" name="crop"> Crop:
+        X: <input type="number" name="crop_x">,
+        Y: <input type="number" name="crop_y">,
+        Width: <input type="number" name="crop_width">,
+        Height: <input type="number" name="crop_height"><br>
+        <input type="checkbox" name="resize"> Resize:
+        Width: <input type="number" name="resize_width">,
+        Height: <input type="number" name="resize_height"><br>
+        <input type="checkbox" name="scale"> Scale:
+        Factor: <input type="number" name="scale_factor" step="0.1"><br>
+        <input type="checkbox" name="flip"> Flip:
+        <select name="flip_direction">
+            <option value="0">Horizontal</option>
+            <option value="1">Vertical</option>
+            <option value="-1">Both</option>
+        </select><br>
+        <input type="checkbox" name="add"> Add Value:
+        Value: <input type="number" name="add_value"><br>
+        <input type="checkbox" name="subtract"> Subtract Value:
+        Value: <input type="number" name="subtract_value"><br>
+        <input type="checkbox" name="multiply"> Multiply Value:
+        Value: <input type="number" name="multiply_value"><br>
+        <input type="checkbox" name="contrast"> Adjust Contrast:
+        Alpha: <input type="number" name="contrast_alpha" step="0.1"><br>
+        <input type="checkbox" name="threshold"> Threshold:
+        Threshold: <input type="number" name="threshold_value"><br>
+        <input type="submit" value="Process Image">
+    </form>
+</body>
+</html>
