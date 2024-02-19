@@ -10,11 +10,12 @@
 <body>
     <h1 class="title">IMAGE PROCESSING TOOL BY GAURAV KRC</h1>
     <h1>Upload Image</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data" id="index">
         <input type="file" name="file" accept="image/*">
-        <h2>Only for Logical Operations </h2>
+        <h3>Only for Logical Operations </h3>
         <input type="file" name="file2" accept="image/*">
         <input type="submit" value="Upload">
     </form>
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
 </body>
 </html>

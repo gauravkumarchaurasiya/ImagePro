@@ -12,7 +12,7 @@ h1 {
 }
 
 form {
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: 20px auto;
     padding: 20px;
     background: #fff;
@@ -29,24 +29,11 @@ input[type="text"],
 select {
     margin-bottom: 10px;
     padding: 10px;
-    width: calc(100% - 20px);
+    width: calc(97% - 15px);
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-/* .annotate {
-   
 }
 
-.annotate input[type="number"],
-.annotate input[type="text"],
-.annotate select {
-   
-    margin-bottom: 10px;
-    padding: 10px;
-    width: calc(40% - 10px);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-} */
 
 input[type="submit"] {
     background-color: #4CAF50;
@@ -72,19 +59,39 @@ label {
 
 input[type="checkbox"] {
     margin-right: 10px;
+    font-size: 1.1rem;
+    font-weight: 100;
+
 }
 
 input[type="checkbox"]:checked {
     color: #4CAF50;
 }
 form {
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: 20px auto;
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
+#index{
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+#index input[type="file"] {
+        margin-bottom: 20px;
+        padding: 10px;
+        width: calc(100% - 20px);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+    }
+
 
 form input[type="file"] {
     margin-bottom: 20px;
@@ -115,4 +122,58 @@ form input[type="submit"]:hover {
     margin-top: 40px;
     margin-bottom: 130px;
    text-decoration: underline;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffecd6;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.form-container {
+    /* max-width: 600px; */
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    margin: 10px;
+}
+
+.form-section h3 {
+    color: #333;
+    font-size: 1.3rem;
+}
+
+/* For small devices (phones, 576px and up) */
+@media (min-width: 576px) {
+    .form-section {
+        width: 100%;
+    }
+}
+
+/* For medium devices (tablets, 768px and up) */
+/* @media (min-width: 600px) {
+    .form-section {
+        width: 50%;
+        float: left;
+    }
+} */
+
+/* For large devices (desktops, 992px and up) */
+@media (min-width: 800px) {
+    .form-section {
+        width: 31%;
+        float: left;
+    }
 }

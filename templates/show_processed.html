@@ -5,9 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processed Image</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center; /* Add this line */
+        }
+        .image-container {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .button {
+            background-color: #4cafac;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #a07d45;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Processed Image</h1>
-    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Processed Image">
+    <h1>Output window</h1>
+    <div class="container">
+        <div class="image-container">
+            <h2>Original Image</h2>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Original Image">
+        </div>
+        <div class="image-container">
+            <h2>Processed Image</h2>
+            <img src="{{ url_for('static', filename='uploads/' + filename2) }}" alt="Processed Image">
+        </div>
+        <a href="{{ url_for('static', filename='uploads/' + filename2) }}" download class="button">Download Processed Image</a>
+    </div>
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
 </body>
 </html>

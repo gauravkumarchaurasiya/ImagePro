@@ -185,15 +185,15 @@ def process_image(filename, filename2):
             
             print("Processed image saved")
             
-            return redirect(url_for('show_processed_image', filename='processed_' + filename))
+            return redirect(url_for('show_processed_image',filename=filename, filename2='processed_' + filename))
         except Exception as e:
             print("An error occurred during image processing:", e)
             return render_template('error.html', error=str(e))
     return render_template('process.html', filename=filename,filename2=filename2)
 
-@app.route('/show_processed/<filename>')
-def show_processed_image(filename):
-    return render_template('show_processed.html', filename=filename)
+@app.route('/show_processed/<filename>/<filename2>')
+def show_processed_image(filename,filename2):
+    return render_template('show_processed.html', filename=filename,filename2=filename2)
 
 if __name__ == '__main__':
     app.run(debug=True)
