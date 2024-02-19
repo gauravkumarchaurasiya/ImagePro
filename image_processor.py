@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
 class ImageProcessor:
-    def __init__(self, image_path):
+    def __init__(self, image_path,image_path2):
         self.image = cv2.imread(image_path)
+        self.other_image = cv2.imread(image_path2)
 
     def convert_to_rgb(self):
         self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
@@ -54,8 +55,11 @@ class ImageProcessor:
     def multiply(self, value):
         self.image = cv2.multiply(self.image, np.array([value]))
 
-    def contrast(self, alpha):
+    def adjust_contrast(self, alpha):
         self.image = cv2.multiply(self.image, alpha)
+    
+    def adjust_brightness_contrast(self, alpha, beta):
+        self.image = cv2.convertScaleAbs(self.image, alpha=alpha, beta=beta)
 
     def threshold(self, threshold):
         _, self.image = cv2.threshold(self.image, threshold, 255, cv2.THRESH_BINARY)
@@ -77,10 +81,10 @@ class ImageProcessor:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-# Example usage:
-if __name__ == "__main__":
-    image_path = 'your_image_path.jpg'  # Provide your image path here
-    processor = ImageProcessor(image_path)
+# # Example usage:
+# if __name__ == "__main__":
+#     image_path = 'your_image_path.jpg'  # Provide your image path here
+#     processor = ImageProcessor(image_path)
     
     # # Convert to RGB
     # processor.convert_to_rgb()
@@ -126,7 +130,5 @@ if __name__ == "__main__":
 #     def convert_to_binary(self, threshold):
 #         _, self.image = cv2.threshold(self.image, threshold, 255, cv2.THRESH_BINARY)
 
-#     def adjust_brightness_contrast(self, alpha, beta):
-#         self.image = cv2.convertScaleAbs(self.image, alpha=alpha, beta=beta)
 
     

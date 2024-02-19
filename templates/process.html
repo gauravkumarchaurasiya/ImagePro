@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Process Image</h1>
-    <form action="/process/{{ filename }}" method="post">
+    <form action="/process/{{ filename }}/{{ filename2 }}" method="post">
         {% if 'rgb' in request.form %}
         <input type="checkbox" name="rgb" checked> Convert to RGB<br>
         {% else %}
@@ -117,6 +117,19 @@
         Alpha: <input type="number" name="contrast_alpha" step="0.1"><br>
         <input type="checkbox" name="threshold"> Threshold:
         Threshold: <input type="number" name="threshold_value"><br>
+
+        <h3>Logical Operations:</h3>
+        {% if 'operation' in request.form %}
+        <input type="checkbox" name="operation" checked> Logical Operation<br>
+        {% else %}
+        <input type="checkbox" name="operation"> Logical Operation<br>
+        {% endif %}
+        <input type="checkbox" name="bitwise_and"> Bitwise AND with other image<br>
+        <input type="checkbox" name="bitwise_or"> Bitwise OR with other image<br>
+        <input type="checkbox" name="bitwise_xor"> Bitwise XOR with other image<br>
+        <input type="checkbox" name="bitwise_not"> Bitwise NOT<br>
+
+
         <input type="submit" value="Process Image">
     </form>
 </body>
