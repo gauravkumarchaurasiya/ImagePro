@@ -46,9 +46,6 @@ def process_image(filename, filename2):
         image_path2 = os.path.join(app.config['UPLOAD_FOLDER'], filename2)
         processor = ImageProcessor(image_path,image_path2)
         
-        print("Image paths:", image_path, image_path2)
-        print("Processor created") 
-        
         try:
             if 'rgb' in request.form:
                 processor.convert_to_rgb()
@@ -87,13 +84,10 @@ def process_image(filename, filename2):
                         radius = int(request.form['circle_radius'])
                         processor.add_circle(center, radius)
                 if 'text' in request.form:
-                    if 'text_x' in request.form and 'text_y' in request.form and request.form['text_x'] and request.form['text_y'] and 'text' in request.form:
-                        print("Text position and content provided")  # Debug statement
-                        text = request.form['text']
+                    if 'text_x' in request.form and 'text_y' in request.form and request.form['text_x'] and request.form['text_y'] :
+                        text1 = request.form['input_text']
                         org = (int(request.form['text_x']), int(request.form['text_y']))
-                        print("Text:", text)  # Debug statement
-                        print("Position (x, y):", org)  # Debug statement
-                        processor.add_text(text, org)
+                        processor.add_text(text1, org)
 
             if 'crop' in request.form:
                 if all(k in request.form for k in ('crop_x', 'crop_y', 'crop_width', 'crop_height')):
@@ -178,12 +172,8 @@ def process_image(filename, filename2):
             
             processed_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'processed_' + filename)
             
-            print("Processed image path:", processed_image_path)
-            print("About to save processed image")
             
             cv2.imwrite(processed_image_path, processor.image)
-            
-            print("Processed image saved")
             
             return redirect(url_for('show_processed_image',filename=filename, filename2='processed_' + filename))
         except Exception as e:

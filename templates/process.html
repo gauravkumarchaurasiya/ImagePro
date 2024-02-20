@@ -111,15 +111,16 @@
         {% endif %}
         {% if 'text' in request.form %}
         <input type="checkbox" name="text" checked> Text:
-        Text: <input type="text" name="text" value="{{ request.form['text'] }}">,
+        Text: <input type="text" name="input_text" value="{{ request.form['input_text'] }}">,
         Position (x, y): <input type="number" name="text_x" value="{{ request.form['text_x'] }}">,
         <input type="number" name="text_y" value="{{ request.form['text_y'] }}"><br>
         {% else %}
         <input type="checkbox" name="text"> Text:
-        Text: <input type="text" name="text">,
+        Text: <input type="text" name="input_text">,
         Position (x, y): <input type="number" name="text_x">,
         <input type="number" name="text_y"><br>
         {% endif %}
+
         </div>
         <div class="form-section">
             <h3>Logical Operations:</h3>
